@@ -1,4 +1,4 @@
-## Assumptions
+## Report
 
 + Assuming that we do not need to handle symlinks for `ls`
 + Assuming that `pinfo` is only run for those processes for which the user has sufficent permissions to read statistics such as executable path.
