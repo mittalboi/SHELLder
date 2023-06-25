@@ -1,0 +1,1 @@
+echo hipwdcd ..cd -lsls -lls -als -alhistorypinfojobsexit

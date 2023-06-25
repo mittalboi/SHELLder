@@ -1,0 +1,39 @@
+else
+            {
+                time_t begin, end;
+                int cid;
+
+                int id = fork();
+                if(id < 0)
+                {
+                    perror("Fork:");
+                    return;
+                }
+                if(id != 0)
+                {
+                    save_job(args_list, args_cnt, id);
+                    printf("\n%d\n", id);
+                    signal(SIGCHLD, handle_sig);
+                }
+                if(id == 0)
+                {
+                    execvp(cmnd, args_list);
+                    fprintf(stderr, "Error has occured with %s\n", cmnd);
+                    exit(1);
+                }
+            }
+
+
+void handle_sig()
+{
+        waitpid(-1, &status, 0);
+        if(WIFEXITED(status))
+        {
+            printf("\n%s with pid = %d exited normally", cmnd, cid);
+        }
+        else
+        {
+            printf("\n%s with pid = %d exited abnormally", cmnd, cid);
+        }
+        exit(0);
+}
